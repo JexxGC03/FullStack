@@ -3,6 +3,7 @@ import { useState } from 'react'
 const MostVotedAnecdote = ({ anecdotes, votes }) => {
   const maxVotes = Math.max(...votes)
   const mostVotedIndex = votes.indexOf(maxVotes)
+  
 
   if (maxVotes === 0) {
     return <p>No votes yet</p>
