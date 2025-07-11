@@ -10,7 +10,7 @@ const Course = ({course}) => {
 }
 
 const Header = (header) => {
-  console.log("Header is: ", header)
+  console.log("Header is:", header)
   return (
     <div>
       <h2>{header.course}</h2>
