@@ -24,6 +24,11 @@
       "id": "db64",
       "content": "a new note...",
       "important": false
+    },
+    {
+      "id": "2fa4",
+      "content": "",
+      "important": true
     }
   ]
 }
