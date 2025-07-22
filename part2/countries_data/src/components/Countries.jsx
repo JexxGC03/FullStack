@@ -20,7 +20,11 @@ const Countries = ({ countries, handleShowSpecificCoutry }) => {
     return (
       <div>
         {countries.map(country => (
-          <Country key={getCountryKey(country)} country={country} handleShowSpecificCoutry={() => handleShowSpecificCoutry(country.name.common)} />
+          <Country
+            key={getCountryKey(country)}
+            country={country} 
+            handleShowSpecificCoutry={() => handleShowSpecificCoutry(country.name.common)} 
+          />
         ))}
       </div>
     );
