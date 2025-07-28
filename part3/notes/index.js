@@ -4,6 +4,7 @@ const cors = require('cors')
 
 app.use(cors())
 
+
 let notes = [
   {
     id: 1,
@@ -30,6 +31,7 @@ const requestLogger = (request, response, next) => {
   next()
 } 
 
+app.use(express.static('dist'))
 app.use(express.json())
 app.use(requestLogger)
 
