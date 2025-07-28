@@ -8,7 +8,7 @@ import Notification from "./components/Notification";
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
-  const [newPhone, setNewPhone] = useState('')
+  const [newNumber, setNewNumber] = useState('')
   const [filter, setFilter] = useState('')
   const [notification, setNotification] = useState(null)
 
@@ -23,11 +23,11 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    if (!newName.trim() || !newPhone.trim()) {
+    if (!newName.trim() || !newNumber.trim()) {
       alert('Por favor, completa ambos campos antes de agregar.');
       return;
     }
-    handleAddOrUpdatePerson(newName, newPhone);
+    handleAddOrUpdatePerson(newName, newNumber);
   }
   
   const personsToShow = persons.filter(person =>
@@ -35,10 +35,10 @@ const App = () => {
   );
   
   //Controladores
-  const handleAddOrUpdatePerson = (name, phone) => {
+  const handleAddOrUpdatePerson = (name, number) => {
     const existingPerson = persons.find(person => person.name === name);
     if (existingPerson) {
-      if (existingPerson.phone === phone) {
+      if (existingPerson.number === number) {
         alert('El contacto ya existe con el mismo número.');
         return;
       } else {
@@ -47,16 +47,16 @@ const App = () => {
           `${name} ya está en la agenda, ¿deseas actualizar el número?`
         );
         if (confirmUpdate) {
-          const updatedPerson = { ...existingPerson, phone, id: String(existingPerson.id) };
+          const updatedPerson = { ...existingPerson, number, id: String(existingPerson.id) };
           personsService
             .update(String(existingPerson.id), updatedPerson)
             .then((returnedPerson) => {
               console.log("returned person", returnedPerson)
               setPersons(persons.map(p => String(p.id) !== String(existingPerson.id) ? p : returnedPerson));
               setNewName('');
-              setNewPhone('');
+              setNewNumber('');
               setNotification({
-                message: `Se ha actualizado el telefono de ${returnedPerson.name} a "${returnedPerson.phone}" con exito`,
+                message: `Se ha actualizado el telefono de ${returnedPerson.name} a "${returnedPerson.number}" con exito`,
                 type: 'success'
               })
               setTimeout(() => {
@@ -81,16 +81,16 @@ const App = () => {
     const maxId = persons.length > 0 ? Math.max(...persons.map(p => Number(p.id))) : 0;
     const personObjet = {
       name,
-      phone,
-        id: String(maxId + 1),
+      number,
+      id: String(maxId + 1),
     };
 
     personsService.create(personObjet).then(() => {
       setPersons([...persons, personObjet]);
       setNewName('');
-      setNewPhone('');
+      setNewNumber('');
       setNotification({
-        message: `Se ha creado el contacto de ${personObjet.name} con el número: "${personObjet.phone}"`,
+        message: `Se ha creado el contacto de ${personObjet.name} con el número: "${personObjet.number}"`,
         type: 'success'
       })
       setTimeout(() => {
@@ -104,8 +104,8 @@ const App = () => {
     setNewName(event.target.value);
   };
 
-  const handlePhoneChangue = (event) => {
-    setNewPhone(event.target.value);
+  const handleNumberChangue = (event) => {
+    setNewNumber(event.target.value);
   };
 
   const handleFilterChangue = (event) => {
@@ -134,9 +134,9 @@ const App = () => {
       <PersonForm
         addPerson={addPerson}
         newName={newName}
-        newPhone={newPhone}
+        newNumber={newNumber}
         handleNameChangue={handleNameChangue}
-        handlePhoneChangue={handlePhoneChangue}
+        handleNumberChangue={handleNumberChangue}
       />
       <h2>Numbers</h2>
       <Persons persons={personsToShow} handleDelete={handleDelete} />

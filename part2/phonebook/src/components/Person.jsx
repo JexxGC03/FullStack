@@ -1,6 +1,6 @@
 const Person = ({ person, handleDelete }) => (
   <div>
-    {person.name} {person.phone}
+    {person.name} {person.number}
     <button onClick={handleDelete}>delete!</button>
   </div>
 )
