@@ -7,3 +7,6 @@ content-type: application/json
 {
     "content": "Buenas"
 }
+
+###
+DELETE http://localhost:3001/api/notes/68892d41ef7cf146ec9d4703
