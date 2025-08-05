@@ -97,6 +97,22 @@ const App = () => {
         setNotification(null)
       }, 5000)
     })
+    .catch((error) => {
+      console.log("error", error)
+      let errorMsg = `Ocurrió un error al crear el contacto.`;
+      if (error.response && error.response.data && error.response.data.error) {
+        errorMsg = error.response.data.error;
+      } else if (error.message) {
+        errorMsg = error.message;
+      }
+      setNotification({
+        message: errorMsg,
+        type: 'error'
+      })
+      setTimeout(() => {
+        setNotification(null)
+      }, 8000);
+    })
     
   }
 
